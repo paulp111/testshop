@@ -1,5 +1,5 @@
 <?php
-namespace PP\shop\Database;
+namespace PP\shop\Database; //Database folder
 
 class Shop {
     protected Database $database;
@@ -13,7 +13,13 @@ class Shop {
         $this->database = new Database($host, $username, $password, $database, $port);
     }
 
-    // Getter methods
-
-    //Localhost via unix socket
+    public function getDatabase(): Database {
+        return $this->database;
     }
+    public function getRole() {
+        if(empty($this->role)) {
+            $this->role = new Role($this->database);
+        }
+        return $this->role;
+    }
+}
